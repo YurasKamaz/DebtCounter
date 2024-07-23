@@ -21,8 +21,8 @@ export default class DebtorsStore {
     async addDebtor(name, userId) {
         try {
             const response = await debtorService.add(name, userId)
-            //console.log(response.data.debtor)
-            this._debtors.push(response.data.name)
+            console.log(response.data.debtor)
+            this._debtors.push(response.data.debtor)
         } catch (e) {
             console.log(e)
         }

@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import { fetchDebtors } from '../http/debtorsAPI';
 import DebtorModal from '../components/modals/DebtorModal';
 import Skeleton from '../components/Skeleton/Skeleton';
+import {useQuery} from 'react-query'
 
 
 const Debtors = observer(() => {
@@ -12,8 +13,15 @@ const Debtors = observer(() => {
     const {user} = useContext(Context)
     const [modalVisible, setModalVisible] = useState('')
     const [modalDebtorId, setModalDebtorId] = useState(0)
-    const [isLoading,  setIsLoading] = useState(false)
+    //const [isLoading,  setIsLoading] = useState(false)
+    const {data, isLoading} = useQuery('id', fetchDebtors)
     
+    useEffect(() => {
+        if (data) {
+            debtors.setDebtors(data);
+        }
+    }, [data, debtors]);
+
     const remDebt = async (id) => {
         try {
             //console.log(id)
@@ -23,11 +31,11 @@ const Debtors = observer(() => {
         }
     }
 
-    useEffect(() => {
-        setIsLoading(true)
-        fetchDebtors(user.user.id).then(data => debtors.setDebtors(data))
-        setIsLoading(false)
-    }, [debtors.debtors.length])
+    // useEffect(() => {
+    //     setIsLoading(true)
+    //     fetchDebtors(user.user.id).then(data => debtors.setDebtors(data))
+    //     setIsLoading(false)
+    // }, [debtors.debtors.length])
 
     return(
         <>
