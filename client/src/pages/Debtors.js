@@ -12,7 +12,7 @@ const Debtors = observer(() => {
     const {user} = useContext(Context)
     const [modalVisible, setModalVisible] = useState('')
     const [modalDebtorId, setModalDebtorId] = useState(0)
-    const [isLoading,  setIsLoading] = useState(true)
+    const [isLoading,  setIsLoading] = useState(false)
     
     const remDebt = async (id) => {
         try {
