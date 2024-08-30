@@ -3,10 +3,12 @@ import { Button, Card, Col, Container, ListGroup } from 'react-bootstrap';
 import { Context } from '..';
 import { fetchDebt } from '../http/debtsAPI';
 import { observer } from 'mobx-react-lite';
+import ChangeDebtBtn from './buttons/ChangeDebtBtn';
 
 const Debts = observer(({debtorId}) => {
     const {debts, debtors} = useContext(Context)
     const [sum, setSum] = useState(0)
+    const [flag, setFlag] = useState(false)
 
     const remDebt = async (id) => {
         try {
@@ -18,7 +20,8 @@ const Debts = observer(({debtorId}) => {
     }
 
     useEffect(() => {
-        fetchDebt(debtors.debtors.id).then(data => debts.setDebts(data))
+        //console.log(debtors.debtors.id)
+        fetchDebt().then(data => debts.setDebts(data))
     }, [debts.debts.length])
 
     //console.log(debts)
@@ -34,7 +37,7 @@ const Debts = observer(({debtorId}) => {
                                     <p>{debt.debt} руб.</p>
                                 </Container>
                                 <Container className='d-flex justify-content-between mt-2'>
-                                    <Button variant='warning'>✎</Button>
+                                    <ChangeDebtBtn debtId={debt.id}/>
                                     <Button variant='danger' onClick={() => remDebt(debt.id)}>✖</Button>
                                 </Container>                      
                             </ListGroup.Item>                           

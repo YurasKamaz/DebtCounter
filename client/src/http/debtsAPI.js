@@ -5,8 +5,8 @@ export const createDebt = async (debt) => {
     return data
 }
 
-export const fetchDebt = async (debtorId) => {
-    const {data} = await $api.get(`/debts?debtorId=${debtorId}`)
+export const fetchDebt = async () => {
+    const {data} = await $api.get(`/debts`)
     //console.log(data)
     return data
 }

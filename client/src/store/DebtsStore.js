@@ -38,4 +38,15 @@ export default class DebtsStore {
             console.log(e)
         }
     }
+
+    async changeDebt(id, title, debt) {
+        try {
+            const response = await debtService.change(id, title, debt)
+            //console.log(response)
+            const debts = this._debts.filter(debt => debt.id !== id)
+            this.setDebts(debts)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 }

@@ -5,7 +5,7 @@ class debtorController{
     async create(req, res){
         const {name, userId} = req.body
         const debtor = await Debtor.create({name, userId})
-        return res.json({debtor: debtor})
+        return res.json(debtor)
     }
 
     async delete(req, res){
